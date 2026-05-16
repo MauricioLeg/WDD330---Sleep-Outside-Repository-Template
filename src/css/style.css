@@ -110,6 +110,24 @@ button {
   cursor: pointer;
 }
 
+/* Unique style for remove-from-cart button */
+.remove-from-cart {
+  color: #fff;
+  border-radius: 30px;
+  width: 1.2em;
+  height: 2.2em;
+  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  margin: 0.5em auto;
+}
+.remove-from-cart:hover {
+  background-color: #c0392b;
+  transform: scale(1.1);
+}
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
