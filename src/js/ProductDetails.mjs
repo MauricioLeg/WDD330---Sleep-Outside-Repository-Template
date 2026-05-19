@@ -1,7 +1,6 @@
-import { productId, dataSource } from './product.js'
 import { getLocalStorage, setLocalStorage } from './utils.mjs';
 
-function addProductToCart(product) {
+export function addProductToCart(product) {
   const items = getLocalStorage('so-cart') || [];
   items.push(product);
   setLocalStorage('so-cart', items);
@@ -15,7 +14,7 @@ export default class ProductDetails {
     }
     
     async init() {
-        this.product = await this.dataSource.findProductById(productId);
+        this.product = await this.dataSource.findProductById(this.productId);
         this.renderProductDetails();
         document.getElementById('addToCart').addEventListener('click', this.addProductToCart.bind(this));
     }
@@ -45,3 +44,5 @@ function productDetailsTemplate(product) {
 
     document.getElementById('addToCart').dataset.id = product.Id;
 }
+
+// comment
