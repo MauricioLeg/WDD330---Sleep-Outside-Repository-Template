@@ -1,9 +1,18 @@
 import { getLocalStorage } from './utils.mjs';
 
 function renderCartContents() {
-  const cartItems = getLocalStorage('so-cart');
+  // 1. Add the fallback || [] so cartItems is never null
+  const cartItems = getLocalStorage('so-cart') || [];
+  
+  // 2. This map function is now safe and won't crash if the cart is empty
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  
+  // 3. Cleanly handle the UI if the cart is empty
+  if (cartItems.length === 0) {
+      document.querySelector('.product-list').innerHTML = '<p>Your cart is currently empty.</p>';
+  } else {
+      document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  }
 }
 
 function cartItemTemplate(item) {
