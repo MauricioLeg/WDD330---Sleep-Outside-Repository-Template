@@ -2,12 +2,12 @@ import { getLocalStorage, setLocalStorage } from './utils.mjs';
 
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart') || [];
-  const htmlItems = cartItems.map((item, index) => cartItemTemplate(item));
+  const htmlItems = cartItems.map((item, index) => cartItemTemplate(item, index));
   document.querySelector('.product-list').innerHTML = htmlItems.join('');
   
   document.querySelectorAll('.remove-from-cart').forEach(button => {
     button.addEventListener('click', function() {
-      const productId = this.getAttribute('data-i');
+      const productId = this.getAttribute('data-id');
       removeFromCart(productId);
     });
   });
