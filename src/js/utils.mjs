@@ -15,9 +15,21 @@ export function setLocalStorage(key, data) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
+  qs(selector).addEventListener('touchend', (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener("click", callback);
+  qs(selector).addEventListener('click', callback);
+}
+export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
+  // 1. If clear is true, empty out the inner HTML of the parent element
+  if (clear) {
+    parentElement.innerHTML = '';
+  }
+
+  // 2. Map through the list using the passed-in template function
+  const htmlStrings = list.map(templateFn);
+
+  // 3. Join the strings and insert them into the DOM
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
 }

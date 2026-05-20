@@ -1,6 +1,5 @@
+import { renderListWithTemplate } from './js/utils.mjs';
 //using template literals
-
-// ProductList.mjs
 
 function productCardTemplate(product) {
     return `<li class="product-card">
@@ -31,8 +30,8 @@ export default class ProductList {
     );
         this.renderList(filteredList);
     }
-    renderList(list) {       
-    const htmlStrings = list.map(productCardTemplate);
-    this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+renderList(list) {
+    // Pass the template function, the target DOM element, and the filtered data array
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
     }
 }
