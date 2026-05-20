@@ -23,7 +23,13 @@ export default class ProductList {
     async init() {
         // from the data source
         const list = await this.dataSource.getData();
-        this.renderList(list);
+        const filteredList = list.filter(product => 
+        product.Id === '880RR' || 
+        product.Id === '985RF' || 
+        product.Id === '985PR' || 
+        product.Id === '344YJ'
+    );
+        this.renderList(filteredList);
     }
     renderList(list) {       
     const htmlStrings = list.map(productCardTemplate);
