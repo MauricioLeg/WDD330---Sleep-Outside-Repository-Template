@@ -1,5 +1,17 @@
+//using template literals
+
 // ProductList.mjs
 
+function productCardTemplate(product) {
+    return `<li class="product-card">
+        <a href="product_pages/?product=${product.Id}">
+        <img src="${product.Image}" alt="Image of ${product.Name}">
+        <h3 class="card__brand">${product.Brand.Name}</h3>
+        <h2 class="card__name">${product.Name}</h2>
+        <p class="product-card__price">$${product.ListPrice}</p>
+        </a>
+    </li>`;
+}
 export default class ProductList {
     constructor(category, dataSource, listElement) {
         // Store these parameters as properties on the class instance
@@ -11,8 +23,10 @@ export default class ProductList {
     async init() {
         // from the data source
         const list = await this.dataSource.getData();
-        
-        // Render the list 
-        console.log('Data received inside ProductList class:', list);
+        this.renderList(list);
+    }
+    renderList(list) {       
+    const htmlStrings = list.map(productCardTemplate);
+    this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
     }
 }
