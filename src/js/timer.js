@@ -1,6 +1,6 @@
 
-const cd = document.querySelector("#timer");
-const startBtn = document.querySelector("button");
+const cd = document.querySelector('#timer');
+const startBtn = document.querySelector('button');
 const body = document.querySelector('body');
 
 let time = 10;
@@ -10,7 +10,7 @@ let isPaused = false;
 // Create pause/resume button but don't add to DOM yet
 const pauseBTN = document.createElement('button');
 pauseBTN.classList.add('pauseBtn');
-pauseBTN.textContent = "Pause";
+pauseBTN.textContent = 'Pause';
 pauseBTN.style.display = 'none';
 body.appendChild(pauseBTN);
 
@@ -28,7 +28,7 @@ function startTimer() {
             } else {
                 clearInterval(interval);
                 interval = null;
-                cd.innerHTML = "Time's up!";
+                cd.innerHTML = 'Time`s up!';
                 pauseBTN.style.display = 'none';
                 startBtn.disabled = false;
             }
@@ -42,7 +42,7 @@ startBtn.addEventListener('click', () => {
         time = 10;
         isPaused = false;
         startBtn.disabled = true;
-        pauseBTN.textContent = "Pause";
+        pauseBTN.textContent = 'Pause';
         pauseBTN.style.display = 'inline-block';
         startTimer();
     }
@@ -51,6 +51,6 @@ startBtn.addEventListener('click', () => {
 pauseBTN.addEventListener('click', () => {
     if (interval !== null) {
         isPaused = !isPaused;
-        pauseBTN.textContent = isPaused ? "Resume" : "Pause";
+        pauseBTN.textContent = isPaused ? 'Resume' : 'Pause';
     }
 });
