@@ -28,10 +28,33 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
-  const string = list.map(templateFn);
+export function renderListWithTemplate(template, parentElement, list, position = 'afterbegin', clear = false) {
+  const string = list.map(template);
   if (clear) {
     parentElement.innerHTML = '';
   }
   parentElement.insertAdjacentHTML(position, string.join(''));
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const resp = await fetch(path);
+  const template = await resp.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate('../partials/header.html');
+  const headerElement = document.getElementById('main-header');
+  renderWithTemplate(headerTemplate, headerElement);
+
+  const footerTemplate = await loadTemplate('../partials/footer.html');
+  const footerElement = document.getElementById('main-footer');
+  renderWithTemplate(footerTemplate, footerElement);
 }
