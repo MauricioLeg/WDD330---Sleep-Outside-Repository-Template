@@ -25,8 +25,10 @@ export default class ProductList {
     }
 
     renderList(products) {
+        if (this.title) {
+            const cleanTitle = this.category.replace('-', ' ');
+            this.title.innerHTML = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+        }
         renderListWithTemplate(productCardTemplate, this.listElement, products);
-        const cleanTitle = this.category.replace('-', '');
-        this.title.innerHTML = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
     };
 }
