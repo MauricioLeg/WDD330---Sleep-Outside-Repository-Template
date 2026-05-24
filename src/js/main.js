@@ -1,1 +1,3 @@
-//moved all code to product-listing.js.This file is now empty.
+//moved all code to product-listing.js.
+import { loadHeaderFooter } from './utils.mjs';
+loadHeaderFooter();
