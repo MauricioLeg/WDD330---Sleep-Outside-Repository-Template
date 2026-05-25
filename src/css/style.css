@@ -94,6 +94,42 @@ p {
   margin-top: -1.7em;
 }
 
+.search-container {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+#searchForm {
+  display: flex;
+  border: 1px solid var(--light-grey, #ccc);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#searchInput {
+  border: none;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  outline: none;
+  width: 200px;
+}
+
+#searchButton {
+  background-color: white;
+  border-radius: 20px;
+  padding: 0 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#searchButton:hover {
+  background-color: var(--primary-color, #333);
+  color: white;
+}
+
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);

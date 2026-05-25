@@ -4,9 +4,11 @@ import ProductList from "./ProductList.mjs";
 
 loadHeaderFooter();
 
-const category = getParam("category");
+
+// Check for either a 'search' keyword or a 'category' in the URL
+const query = getParam("search") || getParam("category");
 const dataSource = new ProductData();
 const element = document.querySelector(".product-list");
-const listing = new ProductList(category, dataSource, element);
+const listing = new ProductList(query, dataSource, element);
 
 listing.init();

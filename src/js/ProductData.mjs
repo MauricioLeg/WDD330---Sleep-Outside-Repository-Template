@@ -10,15 +10,19 @@ function convertToJson(res) {
 
 export default class ProductData {
   constructor() {
-    // this.category = category;
-    // this.path = `../public/json/${this.category}.json`;
+    // No longer needs a hardcoded local file path tracker
   }
-  async getData(category) {
-    const response = await fetch(`${baseURL}products/search/${category}`);
+
+  // UPDATED: Added an optional 'isSearch' parameter flag
+  async getData(query, isSearch = false) {
+    // Whether it's a category like 'tents' or a text query like 'marmot', 
+    // we send it straight to the search endpoint wrapper
+    const response = await fetch(`${baseURL}products/search/${query}`);
     const data = await convertToJson(response);
     
     return data.Result;
   }
+
   async findProductById(id) {
     const response = await fetch(`${baseURL}product/${id}`);
     const data = await convertToJson(response);
