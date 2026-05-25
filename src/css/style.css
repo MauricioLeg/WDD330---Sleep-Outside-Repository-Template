@@ -265,3 +265,69 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+
+/* ==========================================================================
+   Product Categories Layout (Home Page)
+   ========================================================================== */
+
+/* Centers the section title matching your team's .products padding structure */
+.product-categories {
+  margin-top: 3rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Section Headline uses your exact headline font configuration */
+.product-categories h2 {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  color: var(--dark-grey);
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+/* Flexbox container logic matching your image layout mockup exactly */
+.category-grid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem; /* Creates a clean, proportional space between the 4 cards */
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Individual Category Card properties */
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--dark-grey);
+  flex: 1 1 160px; /* Sizes item nodes evenly while staying fully responsive */
+  max-width: 180px;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Controls width boundaries for the course SVG assets */
+.category-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+/* Text category names placement rules */
+.category-card h3 {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 0.25rem;
+}
+
+/* Clean micro-interaction popup feedback effect on mouse hover */
+.category-card:hover {
+  transform: translateY(-5px);
+}
