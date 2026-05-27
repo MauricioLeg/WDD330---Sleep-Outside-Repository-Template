@@ -1,9 +1,9 @@
 import { getLocalStorage, setLocalStorage } from './utils.mjs';
 
 export function addProductToCart(product) {
-  const items = getLocalStorage('so-cart') || [];
-  items.push(product);
-  setLocalStorage('so-cart', items);
+    const items = getLocalStorage('so-cart') || [];
+    items.push(product);
+    setLocalStorage('so-cart', items);
 }
 
 export default class ProductDetails {
@@ -15,27 +15,29 @@ export default class ProductDetails {
     
     async init() {
         this.product = await this.dataSource.findProductById(this.productId);
-        this.renderProductDetails();
+        this.renderProductDetails('main');
         document.getElementById('addToCart').addEventListener('click', this.addProductToCart.bind(this));
     }
 
     addProductToCart() {
-    const cartItems = getLocalStorage("so-cart") || [];
-    cartItems.push(this.product);
-    setLocalStorage("so-cart", cartItems);
+        const cartItems = getLocalStorage('so-cart') || [];
+        cartItems.push(this.product);
+        setLocalStorage('so-cart', cartItems);
     }
     
-    renderProductDetails() {
-        productDetailsTemplate(this.product);
+    renderProductDetails(containerId) {
+        productDetailsTemplate(this.product, containerId);
     }
 }
 
-function productDetailsTemplate(product) {
-    document.querySelector('h2').textContent = product.Brand.Name;
-    document.querySelector('h3').textContent = product.NameWithoutBrand;
+function productDetailsTemplate(product, containerId) {
+    const container = document.getElementById(containerId);
+    container.querySelector('h2').textContent = product.Brand.Name;
+    container.querySelector('h3').textContent = product.NameWithoutBrand;
 
     const productImage = document.getElementById('productImage');
-    productImage.src = product.Image;
+    
+    productImage.src = product.Images.PrimaryLarge;
     productImage.alt = product.NameWithoutBrand;
 
     document.getElementById('productPrice').textContent = product.FinalPrice;
@@ -45,4 +47,3 @@ function productDetailsTemplate(product) {
     document.getElementById('addToCart').dataset.id = product.Id;
 }
 
-// comment

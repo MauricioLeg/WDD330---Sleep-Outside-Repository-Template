@@ -23,9 +23,11 @@ export default class ProductData {
     return data.Result; 
   }
 
-  async findProductById(id) {
-    // We will refactor this to query the API directly in Step 6!
-    const products = await this.getData();
-    return products.find((item) => item.Id === id);
-  }
+async findProductById(id) {
+  const response = await fetch(`${baseURL}product/${id}`);
+  const data = await convertToJson(response);
+  
+  // Return the nested Result object from the API
+  return data.Result;
+}
 }

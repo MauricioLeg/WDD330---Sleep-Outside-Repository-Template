@@ -1,22 +1,16 @@
-import getParam from './utils.mjs';
+import { getParam, loadHeaderFooter } from './utils.mjs';
 import ProductData from './ProductData.mjs';
 import ProductDetails from './ProductDetails.mjs';
-import { addProductToCart } from './ProductDetails.mjs';
-import { getLocalStorage } from './utils.mjs';
 
-const dataSource = new ProductData('tents');
+// Activate header and footer templates
+loadHeaderFooter();
+
+// Initialize the data source without hardcoded categories
+const dataSource = new ProductData();
+
+// Dynamically pull the specific product ID from the URL string
 const productId = getParam('product');
 
+// Instantiate and initialize the product details view
 const product = new ProductDetails(productId, dataSource);
 product.init();
-
-// add to cart button event handler
-async function addToCartHandler(e) {
-  const product = await dataSource.findProductById(e.target.dataset.id);
-  addProductToCart(product);
-}
-
-// add listener to Add to Cart button
-document.getElementById('addToCart').addEventListener('click', addToCartHandler);
-
-// comment
