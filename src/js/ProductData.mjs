@@ -10,7 +10,7 @@ function convertToJson(res) {
 
 export default class ProductData {
   constructor() {
-    // Keep this empty as you did! Perfect.
+    
   }
 
   // 1. Add 'category' as a parameter and switch to async/await
