@@ -12,5 +12,3 @@ const element = document.querySelector('.product-list');
 const productList = new ProductList(category, dataSource, element, title);
 
 productList.init();
-
-// comment
