@@ -304,6 +304,97 @@ button {
   border: 1px solid #c3e6cb;
 }
 
+/* Style for the form page */
+form legend {
+  font-family: var(--font-headline);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  color: var(--secondary-color);
+  margin: 1.5rem 0 1rem 0;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--light-grey);
+  display: block;
+  width: 100%;
+}
+
+form legend:first-of-type {
+  margin-top: 0;
+}
+
+label {
+  font-size: var(--small-font);
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--dark-grey);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: var(--font-base);
+  color: var(--dark-grey);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--tertiary-color);
+  box-shadow: 0 0 0 3px rgba(138, 71, 12, 0.15);
+}
+
+.summary {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 4px;
+  border: 1px solid var(--light-grey);
+  height: fit-content;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.summary::before {
+  content: "Your Order Summary";
+  display: block;
+  font-family: var(--font-headline);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  color: var(--dark-grey);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--light-grey);
+  padding-bottom: 0.2rem;
+}
+
+.summary::after {
+  content: "PLACE ORDER";
+  display: block;
+  text-align: center;
+  background-color: var(--tertiary-color);
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-size: var(--large-font);
+  letter-spacing: 1px;
+  padding: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: background-color 0.2s ease;
+}
+
+.summary::after:hover {
+  background-color: var(--secondary-color); /* Changes from Teracotta to Olive on hover */
+}
+
+.hide {
+  display: none;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
