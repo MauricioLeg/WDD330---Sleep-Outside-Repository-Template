@@ -13,7 +13,6 @@ function renderCartContents() {
     items.textContent = 'The cart is empty';
     if (cartFooter) {
       cartFooter.style.display = 'none';
-      // cartFooter.classList.add("hide");
     }
   } else {
     items.innerHTML = htmlItems.join('');
