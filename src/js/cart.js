@@ -12,12 +12,14 @@ function renderCartContents() {
   if (cartItems.length === 0) {
     items.textContent = 'The cart is empty';
     if (cartFooter) {
-      cartFooter.classList.add("hide");
+      cartFooter.style.display = 'none';
+      // cartFooter.classList.add("hide");
     }
   } else {
     items.innerHTML = htmlItems.join('');
     
     if (cartFooter && totalValueSpan) {
+      cartFooter.style.display = 'block';
       cartFooter.classList.remove("hide");
 
       let total = 0;
