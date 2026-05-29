@@ -22,13 +22,20 @@ export default class ProductDetails {
     
     addProductToCart() {
         const cartItems = getLocalStorage("so-cart") || [];
-        cartItems.push(this.product);
+
+        const productToSave = this.product;
+
+        cartItems.push(productToSave);
         setLocalStorage("so-cart", cartItems);
+        
+        alert(`${this.product.NameWithoutBrand} added to cart`);
     }
     
     renderProductDetails() {
         this.details.innerHTML = productDetailsTemplate(this.product);
-        document.getElementById('addToCart').addEventListener('click', this.addProductToCart.bind(this));
+        document.getElementById('addToCart').addEventListener('click', () => {
+            this.addProductToCart();
+        });
     }
 }
 
