@@ -9,8 +9,8 @@ const category = getParam('category');
 
 const dataSource = new ProductData(category);
 const productId = getParam('product');
-
-const product = new ProductDetails(productId, dataSource);
+const details = document.querySelector('.product-detail');
+const product = new ProductDetails(productId, dataSource, details);
 product.init();
 
 // add to cart button event handler
@@ -20,4 +20,4 @@ async function addToCartHandler(e) {
 }
 
 // add listener to Add to Cart button
-document.getElementById('addToCart').addEventListener('click', addToCartHandler);
+// document.getElementById('addToCart').addEventListener('click', addToCartHandler);

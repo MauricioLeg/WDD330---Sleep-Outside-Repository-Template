@@ -7,40 +7,46 @@ export function addProductToCart(product) {
 }
 
 export default class ProductDetails {
-    constructor(productId, dataSource) {
+    constructor(productId, dataSource, details) {
         this.productId = productId;
         this.product = {};
         this.dataSource = dataSource;
+        this.details = details;
     }
     
     async init() {
-        this.product = await this.dataSource.findProductById(`${baseURL}product/${id}`); // or ${this.productId}?
+        this.product = await this.dataSource.findProductById(`${this.productId}`); // or ${baseURL}product/${id}?
+        console.log(this.product);
         this.renderProductDetails();
-        document.getElementById('addToCart').addEventListener('click', this.addProductToCart.bind(this));
     }
-
+    
     addProductToCart() {
-    const cartItems = getLocalStorage("so-cart") || [];
-    cartItems.push(this.product);
-    setLocalStorage("so-cart", cartItems);
+        const cartItems = getLocalStorage("so-cart") || [];
+        cartItems.push(this.product);
+        setLocalStorage("so-cart", cartItems);
     }
     
     renderProductDetails() {
-        productDetailsTemplate(this.product);
+        this.details.innerHTML = productDetailsTemplate(this.product);
+        document.getElementById('addToCart').addEventListener('click', this.addProductToCart.bind(this));
     }
 }
 
 function productDetailsTemplate(product) {
-    document.querySelector('h2').textContent = product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
-    document.querySelector('h3').textContent = product.NameWithoutBrand;
+    const image = product.Images.PrimaryLarge;
+    const color = product.Colors[0].ColorName;
 
-    const productImage = document.getElementById('productImage');
-    productImage.src = product.Images.PrimaryLarge;
-    productImage.alt = product.NameWithoutBrand;
-
-    document.getElementById('productPrice').textContent = product.FinalPrice;
-    document.getElementById('productColor').textContent = product.Colors[0].ColorName;
-    document.getElementById('productDesc').innerHTML = product.DescriptionHtmlSimple;
-
-    document.getElementById('addToCart').dataset.id = product.Id;
+    return `<h3>${product.Brand.Name}</h3>
+        <h2 class="divider">${product.NameWithoutBrand}</h2>
+        <img
+            class="divider"
+            src="${image}"
+            alt="${product.NameWithoutBrand}"
+        />
+        <p class="product-card__price">${product.FinalPrice}</p>
+        <p class="product__color">${color}</p>
+        <p class="product__description">${product.DescriptionHtmlSimple}</p>
+        <div class="product-detail__add">
+            <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+        </div>`;
 }
