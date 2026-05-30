@@ -1,0 +1,10 @@
+[{
+    "message": "This is an alert message.",
+    "background": "darkblue",
+    "color": "white"        
+},
+{
+    "message": "This is another alert message.",
+    "background": "coral",
+    "color": "black"        
+}]
