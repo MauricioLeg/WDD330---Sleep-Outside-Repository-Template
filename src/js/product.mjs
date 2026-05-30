@@ -1,5 +1,5 @@
 import { getParam, loadHeaderFooter } from './utils.mjs';
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import ProductDetails from './ProductDetails.mjs';
 import { addProductToCart } from './ProductDetails.mjs';
 import { getLocalStorage } from './utils.mjs';
@@ -7,7 +7,7 @@ import { getLocalStorage } from './utils.mjs';
 loadHeaderFooter();
 const category = getParam('category');
 
-const dataSource = new ProductData(category);
+const dataSource = new ExternalServices(category);
 const productId = getParam('product');
 const details = document.querySelector('.product-detail');
 const product = new ProductDetails(productId, dataSource, details);
