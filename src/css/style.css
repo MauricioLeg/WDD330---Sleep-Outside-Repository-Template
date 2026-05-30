@@ -327,6 +327,19 @@ button {
 }
 
 /* Style for the form page */
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.form-inputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+}
 form legend {
   font-family: var(--font-headline);
   font-size: 1.8rem;
@@ -394,8 +407,9 @@ input:focus {
 }
 
 .summary::after {
-  content: "PLACE ORDER";
   display: block;
+  width: 100%;
+  border: none;
   text-align: center;
   background-color: var(--tertiary-color);
   color: #ffffff;
@@ -406,11 +420,12 @@ input:focus {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 2rem;
-  transition: background-color 0.2s ease;
 }
 
 .summary::after:hover {
-  background-color: var(--secondary-color); /* Changes from Teracotta to Olive on hover */
+  background-color: var(--secondary-color); /* Changes from Terracotta to Olive on hover */
+  transition: background-color 0.2s ease;
+  transform: scale(1.2);
 }
 
 .hide {
@@ -430,6 +445,10 @@ input:focus {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+  form {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
   }
 }
 
