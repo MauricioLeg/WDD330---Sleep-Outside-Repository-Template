@@ -1,6 +1,11 @@
-import { getLocalStorage } from "./utils.mjs";
+import { 
+	getLocalStorage, 
+	setLocalStorage,
+	loadHeaderFooter,
+	alertMessage,
+	removeAlerts
+} from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
-import { loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter();
 const services = new ExternalServices();
@@ -84,6 +89,10 @@ export default class CheckoutProcess {
 		}
 	
 		console.log('Form successfully filled out.', orderPayload)
+
+		this.clearCart();
+
+		window.location.href = 'success.html';
 	
 		try {
 			const res = await services.checkout(orderPayload);
@@ -91,6 +100,14 @@ export default class CheckoutProcess {
 		} catch (err) {
 			console.error('Server checkout processing error:', err);
 		}
+		removeAlerts();
+		for (let message in err.message) {
+			alertMessage(err.message[message]);
+		}
+	}
+	clearCart() {
+		this.list = [];
+		setLocalStorage(this.key);
 	}
 }
 
@@ -101,7 +118,11 @@ const formElement = document.querySelector('form');
 if (formElement) {
 	formElement.addEventListener('submit', (event) => {
 		event.preventDefault();
-		checkout.checkout();
+		const chk_status = formElement.checkValidity();
+		formElement.reportValidity();
+		if (chk_status) {
+			checkout.checkout();
+		}
 	});
 }
 

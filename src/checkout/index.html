@@ -36,7 +36,7 @@
 
             <legend>Payment</legend>
             <label for="cardNumber">Credit Card Number</label>
-            <input type="number" name="cardNumber" id="cardNumber" required>
+            <input type="number" name="cardNumber" id="cardNumber" minlength="16" maxlength="16" required>
             <label for="expiration">Expiration Date</label>
             <input type="text" name="expiration" id="expiration" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/[0-9]{2}" title="Please enter a valid expiration date in MM/YY format" required>
             <label for="code">Security Code</label>
