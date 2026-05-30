@@ -1,10 +1,8 @@
 [{
-    "message": "This is an alert message.",
-    "background": "darkblue",
-    "color": "white"        
+    "message": "Free shipping on orders over $50",
+    "color": "black"        
 },
 {
-    "message": "This is another alert message.",
-    "background": "coral",
+    "message": "Today only: 20% off all sleeping bags with code SLEEP20",
     "color": "black"        
 }]

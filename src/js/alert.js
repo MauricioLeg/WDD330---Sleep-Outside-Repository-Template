@@ -25,31 +25,37 @@ export default class Alert {
     
     /// Build the DOM elements and prepend them to <main>
     renderAlerts(alerts) {
-        // 1. Create the <section class="alert-list">
+        // 1. Create the main parent section
         const alertSection = document.createElement('section');
         alertSection.classList.add('alert-list');
 
-        // 2. Loop through each alert and build a <p> element
-        alerts.forEach(alertData => {
-        const p = document.createElement('p');
-        p.innerText = alertData.message;
-        
-        // Apply custom background and text colors
-        p.style.backgroundColor = alertData.background;
-        p.style.color = alertData.color;
-        
-        // Optional: Add a helper class for styling gaps/padding in CSS
-        p.classList.add('alert-item'); 
+        // NEW: Create an inner track element for the scrolling animation
+        const alertTrack = document.createElement('div');
+        alertTrack.classList.add('alert-list-track');
 
-        alertSection.appendChild(p);
+        // 2. Loop through each alert and build a <span> or <p> element
+        alerts.forEach(alertData => {
+            const p = document.createElement('p');
+            p.innerText = alertData.message;
+            
+            // Apply custom text color, but IGNORE background color for the clean look
+            p.style.color = alertData.color;
+            
+            p.classList.add('alert-item'); 
+
+            // Append to the TRACK instead of the section directly
+            alertTrack.appendChild(p);
         });
+
+        // Append the track to the section
+        alertSection.appendChild(alertTrack);
 
         // 3. Prepend to the <main> element of the page
         const mainElement = document.querySelector('main');
         if (mainElement) {
-        mainElement.prepend(alertSection);
+            mainElement.prepend(alertSection);
         } else {
-        throw new Error('Could not find a <main> element to prepend alerts to.');
+            throw new Error('Could not find a <main> element to prepend alerts to.');
         }
     }
 }
