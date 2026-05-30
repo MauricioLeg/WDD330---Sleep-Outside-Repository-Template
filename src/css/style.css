@@ -410,7 +410,7 @@ input:focus {
 }
 
 .summary::after:hover {
-  background-color: var(--secondary-color); /* Changes from Teracotta to Olive on hover */
+  background-color: var(--secondary-color); /* Changes from Terracotta to Olive on hover */
 }
 
 .hide {
