@@ -432,6 +432,21 @@ input:focus {
   display: none;
 }
 
+.superscript {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background-color: #ff4d4d;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 5px;
+  min-width: 16px;
+  text-align: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

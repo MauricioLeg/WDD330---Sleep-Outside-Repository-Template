@@ -50,13 +50,15 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate('../partials/header.html');
+  const headerTemplate = await loadTemplate('/partials/header.html');
   const headerElement = document.getElementById('main-header');
   renderWithTemplate(headerTemplate, headerElement);
 
-  const footerTemplate = await loadTemplate('../partials/footer.html');
+  const footerTemplate = await loadTemplate('/partials/footer.html');
   const footerElement = document.getElementById('main-footer');
   renderWithTemplate(footerTemplate, footerElement);
+
+  updateCartCount();
 }
 
 export function alertMessage(message, scroll=true) {
@@ -76,4 +78,23 @@ export function alertMessage(message, scroll=true) {
 export function removeAlerts() {
   const alerts = document.querySelectorAll('.alert');
   alerts.forEach((alert) => document.querySelector('main').removeChild(alert));
+}
+
+export function updateCartCount() {
+  const cartItems = getLocalStorage('so-cart') || [];
+  const totalCount = cartItems.length;
+  const backpack = document.querySelector('.cart');
+  if (backpack) {
+    let badge = document.querySelector('.superscript');
+
+    if (badge) {
+      if (totalCount > 0) {
+        badge.textContent = totalCount;
+        badge.style.display = 'flex';
+      } else {
+        badge.textContent = '';
+        badge.style.display = 'none';
+      }
+    }
+  }
 }

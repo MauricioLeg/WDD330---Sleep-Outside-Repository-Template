@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, updateCartCount } from "./utils.mjs";
 
 export function productCardTemplate(product) {
     const suggestedPrice = product.SuggestedRetailPrice;
@@ -30,6 +30,8 @@ export default class ProductList {
     async init() {
         const products = await this.dataSource.getData(this.category)
         this.renderList(products);
+        updateCartCount();
+
     }
 
     renderList(products) {

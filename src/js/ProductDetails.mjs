@@ -1,4 +1,7 @@
-import { getLocalStorage, setLocalStorage } from './utils.mjs';
+import { getLocalStorage, 
+    setLocalStorage,
+    updateCartCount
+} from './utils.mjs';
 
 export function addProductToCart(product) {
   const items = getLocalStorage('so-cart') || [];
@@ -27,8 +30,10 @@ export default class ProductDetails {
 
         cartItems.push(productToSave);
         setLocalStorage("so-cart", cartItems);
+
+        updateCartCount();
         
-        alert(`${this.product.NameWithoutBrand} added to cart`);
+        alert(`${this.product.NameWithoutBrand} added to cart`, false);
     }
     
     renderProductDetails() {
