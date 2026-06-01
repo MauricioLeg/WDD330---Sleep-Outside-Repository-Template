@@ -1,8 +1,7 @@
-import { getParam, loadHeaderFooter } from './utils.mjs';
+import { getParam, getLocalStorage, loadHeaderFooter } from './utils.mjs';
 import ExternalServices from './ExternalServices.mjs';
 import ProductDetails from './ProductDetails.mjs';
 import { addProductToCart } from './ProductDetails.mjs';
-import { getLocalStorage } from './utils.mjs';
 
 loadHeaderFooter();
 const category = getParam('category');

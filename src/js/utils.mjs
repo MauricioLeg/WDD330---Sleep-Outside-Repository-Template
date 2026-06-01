@@ -58,3 +58,22 @@ export async function loadHeaderFooter() {
   const footerElement = document.getElementById('main-footer');
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+export function alertMessage(message, scroll=true) {
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+
+  alert.addEventListener('click', function(e) {
+    if (e.target.tagName === 'SPAN' || e.target.classList.contains('close-alert')) {
+      main.removeChild(this);
+    }
+  })
+  const main = document.querySelector('main');
+  main.prepend(alert)
+
+  if (scroll) window.scrollTo(0, 0);
+}
+export function removeAlerts() {
+  const alerts = document.querySelectorAll('.alert');
+  alerts.forEach((alert) => document.querySelector('main').removeChild(alert));
+}
