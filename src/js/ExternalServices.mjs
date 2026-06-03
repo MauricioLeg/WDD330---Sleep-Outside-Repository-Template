@@ -15,6 +15,11 @@ async function convertToJson(res) {
 }
 
 export default class ExternalServices {
+  async searchProducts(query) {
+    const response = await fetch(`${baseURL}products/search/${encodeURIComponent(query)}`);
+    const data = await convertToJson(response);
+    return data.Result;
+  }
   constructor(category) {
   }
   async getData(category) {
