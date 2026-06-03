@@ -447,6 +447,40 @@ input:focus {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Style for the messages */
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  margin: 0 0 1rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+.alert.success {
+  background: #e7f6ec;
+  border-color: #a6d8b4;
+  color: #1f5d35;
+}
+
+.alert.error {
+  background: #fdecec;
+  border-color: #f0b4b4;
+  color: #8b1d1d;
+}
+
+.close-alert {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

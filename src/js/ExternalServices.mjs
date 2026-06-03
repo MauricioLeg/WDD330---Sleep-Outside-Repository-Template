@@ -1,13 +1,6 @@
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 
-async searchProducts(query) {
-  const response = await fetch(`${baseURL}products/search/${query}`);
-  const data = await convertToJson(response);
-  // Returns the array of matching products
-  return data.Result; 
-}
-
 async function convertToJson(res) {
   // 1. Convert response body to JSON first
   const jsonResponse = await res.json();
