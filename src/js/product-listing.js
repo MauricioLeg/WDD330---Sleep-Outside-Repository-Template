@@ -5,10 +5,12 @@ import { loadHeaderFooter, getParam } from './utils.mjs';
 loadHeaderFooter();
 
 const category = getParam('category');
+const searchTerm = getParam('search');
 const title = document.querySelector('.title');
 const dataSource = new ExternalServices();
 const element = document.querySelector('.product-list');
 
-const productList = new ProductList(category, dataSource, element, title);
-
-productList.init();
+if (element) {
+  const productList = new ProductList(category, searchTerm, dataSource, element, title);
+  productList.init();
+}

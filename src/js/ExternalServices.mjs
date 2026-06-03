@@ -1,16 +1,25 @@
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
-function convertToJson(res) {
+
+async function convertToJson(res) {
+  // 1. Convert response body to JSON first
+  const jsonResponse = await res.json();
+
+  // 2. Check if the response status is 'ok'
   if (res.ok) {
-    return res.json();
+    return jsonResponse;
   } else {
-    return res.json().then((err) => {
-      throw { name:'servicesError', message: err };
-    })
+    // 3. If not ok, throw a custom object with name and the server's JSON message
+    throw { name: 'servicesError', message: jsonResponse };
   }
 }
 
 export default class ExternalServices {
+  async searchProducts(query) {
+    const response = await fetch(`${baseURL}products/search/${encodeURIComponent(query)}`);
+    const data = await convertToJson(response);
+    return data.Result;
+  }
   constructor(category) {
   }
   async getData(category) {
@@ -32,8 +41,6 @@ export default class ExternalServices {
       body: JSON.stringify(payload)
     };
 
-    const response = await fetch(`${baseURL}checkout`, options);
-    const result = await convertToJson(response);
-    return result;
+    return await fetch(baseURL + "checkout/", options).then(convertToJson);
   }
 }

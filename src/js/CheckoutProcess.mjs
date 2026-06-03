@@ -78,6 +78,16 @@ export default class CheckoutProcess {
 	}
 	async checkout() {
 		const form = document.querySelector('form');
+		if (!form) {
+		alertMessage('Checkout form not found.');
+		return;
+		}
+
+		if (!this.list || this.list.length === 0) {
+			alertMessage('Your cart is empty. Add items before checking out.');
+			return;
+		}
+
 		const formValues = formDataToJSON(form);
 		const orderPayload = {
 			...formValues,
@@ -86,23 +96,30 @@ export default class CheckoutProcess {
 			orderTotal: this.orderTotal.toFixed(2),
 			shipping: this.shipping,
 			tax: this.tax.toFixed(2)
-		}
-	
-		console.log('Form successfully filled out.', orderPayload)
+		};
 
-		this.clearCart();
-
-		window.location.href = 'success.html';
-	
 		try {
 			const res = await services.checkout(orderPayload);
-			console.log('Order successful:', res)
+			console.log('Order successful:', res);
+
+			removeAlerts();
+			alertMessage('Order placed successfully. Redirecting to confirmation page...', false, 'success');
+
+			this.clearCart();
+
+			setTimeout(() => {
+				window.location.href = './success.html';
+			}, 1200);
 		} catch (err) {
 			console.error('Server checkout processing error:', err);
-		}
-		removeAlerts();
-		for (let message in err.message) {
-			alertMessage(err.message[message]);
+
+			const message =
+				Array.isArray(err?.message)
+					? err.message.join(' ')
+					: err?.message || 'Checkout failed. Please try again.';
+
+			removeAlerts();
+			alertMessage(message, true, 'error');
 		}
 	}
 	clearCart() {
@@ -116,13 +133,17 @@ checkout.init();
 
 const formElement = document.querySelector('form');
 if (formElement) {
-	formElement.addEventListener('submit', (event) => {
+	formElement.addEventListener('submit', async (event) => {
 		event.preventDefault();
-		const chk_status = formElement.checkValidity();
-		formElement.reportValidity();
-		if (chk_status) {
-			checkout.checkout();
+		removeAlerts();
+
+		if (!formElement.checkValidity()) {
+			formElement.reportValidity();
+			alertMessage('Please fix the highlighted fields before placing your order.');
+			return;
 		}
+
+		await checkout.checkout();
 	});
 }
 

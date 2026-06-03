@@ -58,6 +58,7 @@ export async function loadHeaderFooter() {
   const footerElement = document.getElementById('main-footer');
   renderWithTemplate(footerTemplate, footerElement);
 
+  initSearchForm();
   updateCartCount();
 }
 
@@ -97,4 +98,29 @@ export function updateCartCount() {
       }
     }
   }
+}
+
+export function initSearchForm() {
+  const searchForm = document.querySelector('#site-search');
+  if (!searchForm) return;
+
+  const searchInput = searchForm.querySelector('input[name="search"]');
+  if (!searchInput) return;
+
+  const currentSearch = new URLSearchParams(window.location.search).get('search');
+  if (currentSearch) {
+    searchInput.value = currentSearch;
+  }
+
+  searchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const searchTerm = searchInput.value.trim();
+    if (!searchTerm) {
+      alertMessage('Please enter a product name to search for.');
+      return;
+    }
+
+    window.location.href = `/product_listing/index.html?search=${encodeURIComponent(searchTerm)}`;
+  });
 }
