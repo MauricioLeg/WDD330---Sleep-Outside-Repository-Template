@@ -50,11 +50,13 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate('/partials/header.html');
+  const base = import.meta.env.BASE_URL;
+
+  const headerTemplate = await loadTemplate(`${base}partials/header.html`);
   const headerElement = document.getElementById('main-header');
   renderWithTemplate(headerTemplate, headerElement);
 
-  const footerTemplate = await loadTemplate('/partials/footer.html');
+  const footerTemplate = await loadTemplate(`${base}partials/footer.html`);
   const footerElement = document.getElementById('main-footer');
   renderWithTemplate(footerTemplate, footerElement);
 

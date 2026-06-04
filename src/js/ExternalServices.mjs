@@ -16,9 +16,29 @@ async function convertToJson(res) {
 
 export default class ExternalServices {
   async searchProducts(query) {
-    const response = await fetch(`${baseURL}products/search/${encodeURIComponent(query)}`);
-    const data = await convertToJson(response);
-    return data.Result;
+    const categories = ['tents', 'backpacks', 'sleeping-bags'];
+    const allProducts = [];
+
+    for (const category of categories) {
+      const products = await this.getData(category);
+      allProducts.push(...products);
+    }
+
+    const cleanQuery = query.trim().toLowerCase();
+
+    return allProducts.filter(product => {
+      const name = product.Name?.toLowerCase() || '';
+      const shortName = product.NameWithoutBrand?.toLowerCase() || '';
+      const brand = product.Brand?.Name?.toLowerCase() || '';
+      const description = product.DescriptionHtmlSimple?.toLowerCase() || '';
+
+      return (
+        name.includes(cleanQuery) ||
+        shortName.includes(cleanQuery) ||
+        brand.includes(cleanQuery) ||
+        description.includes(cleanQuery)
+      );
+    });
   }
   constructor(category) {
   }
