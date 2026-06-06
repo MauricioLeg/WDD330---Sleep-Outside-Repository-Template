@@ -1,14 +1,24 @@
-import { renderListWithTemplate, updateCartCount } from "./utils.mjs";
+import { renderListWithTemplate, updateCartCount } from './utils.mjs';
 
 export function productCardTemplate(product) {
   const suggestedPrice = product.SuggestedRetailPrice;
   const finalPrice = product.FinalPrice;
-  let discountHtml = "";
+  let discountHtml = '';
+  let priceHtml = '';
 
   if (suggestedPrice && suggestedPrice > finalPrice) {
     const percent = ((suggestedPrice - finalPrice) / suggestedPrice) * 100;
     const discount = Math.round(percent);
-    discountHtml = `<p class="product_discount card_discount">-${discount}%</p>`;
+    // 1. Create the badge layout
+    discountHtml = `<span class="product_discount card_discount">-${discount}% OFF</span>`;
+    
+    // 2. Modify the price display to show both the final price and the crossed-out original retail price
+    priceHtml = `
+      <p class="product-card__price">
+        <span class="sale-price">$${finalPrice.toFixed(2)}</span>
+        <span class="original-price">$${suggestedPrice.toFixed(2)}</span>
+      </p>
+    `;
   }
 
   return `<li class="product-card">
@@ -17,7 +27,7 @@ export function productCardTemplate(product) {
       ${discountHtml}
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.NameWithoutBrand}</h3>
-      <p class="product-card__price">$${product.FinalPrice}</p>
+      ${priceHtml}
     </a>
   </li>`;
 }
@@ -41,7 +51,7 @@ export default class ProductList {
       this.renderTitle(`Search results for "${this.searchTerm}"`);
     } else if (this.category) {
       products = await this.dataSource.getData(this.category);
-      const cleanTitle = this.category.replace(/-/g, " ");
+      const cleanTitle = this.category.replace(/-/g, '');
       this.renderTitle(cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1));
     } else {
       this.listElement.innerHTML = '<li class="product-card product-card--empty">Use the search box or a category to find products.</li>';
@@ -65,6 +75,6 @@ export default class ProductList {
       return;
     }
 
-    renderListWithTemplate(productCardTemplate, this.listElement, products, "beforeend", true);
+    renderListWithTemplate(productCardTemplate, this.listElement, products, 'beforeend', true);
   }
 }
