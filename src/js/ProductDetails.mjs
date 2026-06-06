@@ -44,13 +44,11 @@ export default class ProductDetails {
     }
 }
 
-function productDetailsTemplate(product) {
-    // 1. SAFELY FALLBACK IF IMAGES OBJECT OR PRIMARYLARGE IS MISSING
+function productDetailsTemplate(product) {//fallbacks for missing data:
     const image = product.Images && product.Images.PrimaryLarge 
         ? product.Images.PrimaryLarge 
         : (product.Image || '../images/placeholder.png');
 
-    // 2. SAFELY FALLBACK IF COLORS ARRAY IS MISSING OR EMPTY
     const color = product.Colors && product.Colors.length > 0 
         ? product.Colors[0].ColorName 
         : 'Default Color';
