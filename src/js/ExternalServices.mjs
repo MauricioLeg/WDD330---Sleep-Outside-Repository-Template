@@ -1,5 +1,4 @@
-const baseURL = import.meta.env.VITE_SERVER_URL;
-
+const baseURL = import.meta.env.VITE_SERVER_URL || 'https://wdd330-backend.onrender.com/';
 
 async function convertToJson(res) {
   // 1. Convert response body to JSON first
@@ -20,8 +19,8 @@ export default class ExternalServices {
     const data = await convertToJson(response);
     return data.Result;
   }
-  constructor(category) {
-  }
+  //constructor(category) {
+  //}
   async getData(category) {
     const response = await fetch(`${baseURL}products/search/${category}`);
     const data = await convertToJson(response);
@@ -41,6 +40,6 @@ export default class ExternalServices {
       body: JSON.stringify(payload)
     };
 
-    return await fetch(baseURL + "checkout/", options).then(convertToJson);
+    return await fetch(baseURL + 'checkout/', options).then(convertToJson);
   }
 }
